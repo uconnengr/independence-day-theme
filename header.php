@@ -171,3 +171,6 @@
     <!-- content area -->
     <div class = "long-row" id = "body-box">
         <div class = "row" id = "contentsection">
+<?php if(!is_front_page()): ?>
+<?php custom_breadcrumbs(); ?>
+<?php endif; ?>

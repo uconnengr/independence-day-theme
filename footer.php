@@ -594,7 +594,7 @@ ul#default-footer li a:hover{
 </style>
 <script language = "javascript" type = "text/javascript">
     
-    $(document).foundation();
+    jQuery(document).foundation();
     
 </script>
 </body>

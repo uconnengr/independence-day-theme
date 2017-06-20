@@ -10,7 +10,131 @@
 <?php require_once(get_template_directory() . "/inc/site.footer.customizer.php"); ?>
 <?php require_once(get_template_directory() . "/inc/site.after.footer.customizer.php"); ?>
 <?php require_once(get_template_directory() . "/inc/site.utils-functions.php"); ?>
+<?php require_once(get_template_directory() . "/inc/news.widget.php"); ?>
 <?php
+
+remove_action('wp_head', 'wp_generator');
+if ( ! function_exists('custom_post_announcement') ) {
+
+// Register Custom Post Type
+function custom_post_announcement() {
+
+	$labels = array(
+		'name'                => _x( 'Announcements', 'Post Type General Name', 'text_domain' ),
+		'singular_name'       => _x( 'Announcement', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'           => __( 'Announcement', 'text_domain' ),
+		'name_admin_bar'      => __( 'Announcements', 'text_domain' ),
+		'parent_item_colon'   => __( 'Parent Announcement:', 'text_domain' ),
+		'all_items'           => __( 'All Announcements', 'text_domain' ),
+		'add_new_item'        => __( 'Add New Announcements', 'text_domain' ),
+		'add_new'             => __( 'Add New', 'text_domain' ),
+		'new_item'            => __( 'New Announcement', 'text_domain' ),
+		'edit_item'           => __( 'Edit Announcement', 'text_domain' ),
+		'update_item'         => __( 'Update Announcement', 'text_domain' ),
+		'view_item'           => __( 'View Announcement', 'text_domain' ),
+		'search_items'        => __( 'Search Announcements', 'text_domain' ),
+		'not_found'           => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'  => __( 'Not found in Trash', 'text_domain' ),
+	);
+	$args = array(
+		'label'               => __( 'announcement_post_type', 'text_domain' ),
+		'description'         => __( 'Announcement Type Description', 'text_domain' ),
+		'labels'              => $labels,
+		'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields', 'page-attributes', 'post-formats', ),
+		'taxonomies'          => array( 'category', 'post_tag' ),
+		'hierarchical'        => false,
+		'public'              => true,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'menu_position'       => 20,
+		'show_in_admin_bar'   => true,
+		'show_in_nav_menus'   => true,
+		'can_export'          => true,
+		'has_archive'         => true,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'capability_type'     => 'page',
+	);
+	register_post_type( 'announcement_post_type', $args );
+	
+	// This theme supports a variety of post formats.
+	add_theme_support( 'post-formats', array( 'aside', 'image', 'link', 'quote', 'status', 'audio', 'video' ) );
+
+        // allow thumbails for posts        
+        add_theme_support( 'post-thumbnails' );
+	
+
+}
+
+// Hook into the 'init' action
+add_action( 'init', 'custom_post_announcement');
+
+}
+
+add_action('widgets_init', 'register_NewsWidget');
+
+function register_NewsWidget(){
+    
+    register_widget('NewsWidget');
+    
+}
+
+if ( ! function_exists('custom_post_announcement') ) {
+
+// Register Custom Post Type
+function custom_post_announcement() {
+
+	$labels = array(
+		'name'                => _x( 'Announcements', 'Post Type General Name', 'text_domain' ),
+		'singular_name'       => _x( 'Announcement', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'           => __( 'Announcement', 'text_domain' ),
+		'name_admin_bar'      => __( 'Announcements', 'text_domain' ),
+		'parent_item_colon'   => __( 'Parent Announcement:', 'text_domain' ),
+		'all_items'           => __( 'All Announcements', 'text_domain' ),
+		'add_new_item'        => __( 'Add New Announcements', 'text_domain' ),
+		'add_new'             => __( 'Add New', 'text_domain' ),
+		'new_item'            => __( 'New Announcement', 'text_domain' ),
+		'edit_item'           => __( 'Edit Announcement', 'text_domain' ),
+		'update_item'         => __( 'Update Announcement', 'text_domain' ),
+		'view_item'           => __( 'View Announcement', 'text_domain' ),
+		'search_items'        => __( 'Search Announcements', 'text_domain' ),
+		'not_found'           => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'  => __( 'Not found in Trash', 'text_domain' ),
+	);
+	$args = array(
+		'label'               => __( 'announcement_post_type', 'text_domain' ),
+		'description'         => __( 'Announcement Type Description', 'text_domain' ),
+		'labels'              => $labels,
+		'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields', 'page-attributes', 'post-formats', ),
+		'taxonomies'          => array( 'category', 'post_tag' ),
+		'hierarchical'        => false,
+		'public'              => true,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'menu_position'       => 20,
+		'show_in_admin_bar'   => true,
+		'show_in_nav_menus'   => true,
+		'can_export'          => true,
+		'has_archive'         => true,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'capability_type'     => 'page',
+	);
+	register_post_type( 'announcement_post_type', $args );
+	
+	// This theme supports a variety of post formats.
+	add_theme_support( 'post-formats', array( 'aside', 'image', 'link', 'quote', 'status', 'audio', 'video' ) );
+
+        // allow thumbails for posts        
+        add_theme_support( 'post-thumbnails' );
+	
+
+}
+
+// Hook into the 'init' action
+add_action( 'init', 'custom_post_announcement', 0 );
+
+}
 
 add_action('wp_enqueue_scripts', 'load_independence_day_css_js');
 
@@ -18,7 +142,7 @@ function load_independence_day_css_js(){
 
 	// remove jQuery
 	
-	wp_deregister_script( 'jquery' );
+	//	wp_deregister_script( 'jquery' );
 	
 	// load default style sheets
 
@@ -30,7 +154,7 @@ function load_independence_day_css_js(){
 	
 	// load default js
 	
-	wp_enqueue_script('vendor-jQuery', get_template_directory_uri() . '/js/vendor/jquery.js');
+	wp_enqueue_script('jquery');
 	wp_enqueue_script('vendor-modernizr', get_template_directory_uri() . '/js/vendor/modernizr.js');
 	wp_enqueue_script('foundation-jQuery', get_template_directory_uri() . '/js/foundation.min.js');
 	
@@ -69,6 +193,16 @@ function independence_day_widgets_init(){
 	) );
 
 	register_sidebar( array(
+		'name'          => __( 'Front Page Area', 'independence-day' ),
+		'id'            => 'frontpage-area',
+		'description'   => __( 'This widget houses the content above the footer bar', 'independence-day' ),
+		'before_widget' => '<div id="frontpage-area-%1$s" class="frontpage-area-widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class = "rss-widget-bar"><p><span>',
+		'after_title'   => '</p></span></div>',
+	) );
+
+	register_sidebar( array(
 		'name'          => __( 'Subfooter Area', 'independence-day' ),
 		'id'            => 'sub-footerarea',
 		'description'   => __( 'This widget houses the content above the footer bar', 'independence-day' ),
@@ -77,7 +211,7 @@ function independence_day_widgets_init(){
 		'before_title'  => '',
 		'after_title'   => '',
 	) );
-    
+
 	register_sidebar( array(
 		'name'          => __( 'Footer Area', 'independence-day' ),
 		'id'            => 'footerarea',

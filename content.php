@@ -1,4 +1,2 @@
-<div class = "large-12 column" id = "content-box">
-<?php the_title(); ?>
+<h2 class = "content-title"><?php the_title(); ?></h2>
 <?php the_content(); ?>
-</div>
